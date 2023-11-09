@@ -7,12 +7,14 @@ from personalizada import Personalizada, ConstructorPersonalizada
 from pizzeria import Pizzeria
 from barbacoa import Barbacoa, ConstructorBarbacoa
 from usuario import UsuarioBuilder, UsuarioDirector
+import collections
+
+
 class Menu(Pizzeria):
 
     def Menu():
         
         print("Bienvenido a la pizzeria")
-        #crear usuario
         usuario_builder = UsuarioBuilder()
         usuario_director = UsuarioDirector(usuario_builder)
         usuario_director.crear_usuario("","","","")
@@ -306,6 +308,96 @@ class Menu(Pizzeria):
                                 print("Opción no válida")
                             writer.writerow(detalles)
         print('Has elegido', pizza_seleccionada)
+        
+    def leer_csv():
+        archivo_pedidos = 'pedidos.csv'
+        archivo_existe = os.path.isfile(archivo_pedidos) and os.path.getsize(archivo_pedidos) > 0
+        if archivo_existe:
+            with open(archivo_pedidos, 'r', newline="") as file:
+                reader = csv.reader(file, delimiter=';')
+                for row in reader:
+                    print('Su último pedido fue: ')
+                    print('----------------------------')
+                    #imprimir el pedido pero no el encabezado
+                    if row[0] != 'Usuario':
+                        print(f'Usuario: {row[0]}')
+                        print(f'Tipo de pizza: {row[1]}')
+                        print(f'Masa: {row[2]}')
+                        print(f'Cocción: {row[3]}')
+                        print(f'Presentación: {row[4]}')
+                        print(f'Maridaje: {row[5]}')
+                        print(f'Extras: {row[6]}')
+                        if row[1] == "Personalizada":
+                            print(f'Ingredientes: {row[7]}')
+                            print(f'Salsa: {row[8]}')
+                        else:
+                            print(f'Ingredientes: {row[7]}')
+                            print(f'Salsa: {row[8]}')
+                        print('----------------------------')
+        else:
+            print("No hay pedidos registrados")
+            
+    leer_csv()
+
+    def obtener_preferencias_usuario(usuario):
+        archivo_pedidos = 'pedidos.csv'
+        preferencias = {'masa': collections.defaultdict(int),
+                        'coccion': collections.defaultdict(int),
+                        'presentacion': collections.defaultdict(int),
+                        'maridaje': collections.defaultdict(int)}
+        # Asegúrate de que el archivo_pedidos existe y no está vacío antes de intentar abrirlo.
+        try:
+            with open(archivo_pedidos, 'r', newline="") as file:
+                reader = csv.reader(file, delimiter=';')
+                next(reader, None)  # Saltar el encabezado
+                for row in reader:
+                    if row[0] == usuario:
+                        preferencias['masa'][row[2]] += 1
+                        preferencias['coccion'][row[3]] += 1
+                        preferencias['presentacion'][row[4]] += 1
+                        preferencias['maridaje'][row[5]] += 1
+                        # Añadir lógica similar para ingredientes y extras si es necesario
+        except FileNotFoundError:
+            print(f"El archivo {archivo_pedidos} no existe.")
+        except IndexError:
+            print("El archivo CSV no tiene el formato esperado.")
+        
+        return preferencias
+    obtener_preferencias_usuario('usuario')
+
+    def recomendar_basado_en_historial(usuario, obtener_preferencias_usuario):
+        preferencias = obtener_preferencias_usuario(usuario)
+        
+        # Encuentra las preferencias más comunes
+        if preferencias['masa']:
+            masa_recomendada = max(preferencias['masa'], key=preferencias['masa'].get)
+        else:
+            masa_recomendada = 'default_value' 
+
+        if preferencias['coccion']:
+            coccion_recomendada = max(preferencias['coccion'], key=preferencias['coccion'].get)
+        else:
+            coccion_recomendada = 'default_value'
+        
+        if preferencias['presentacion']:
+            presentacion_recomendada = max(preferencias['presentacion'], key=preferencias['presentacion'].get)
+        else:
+            presentacion_recomendada = 'default_value'
+        
+        if preferencias['maridaje']:
+            maridaje_recomendado = max(preferencias['maridaje'], key=preferencias['maridaje'].get)
+        else:  
+            maridaje_recomendado = 'default_value'
+
+        print("Basado en tus pedidos anteriores, te recomendamos:")
+        print(f"Masa: {masa_recomendada}")
+        print(f"Cocción: {coccion_recomendada}")
+        print(f"Presentación: {presentacion_recomendada}")
+        print(f"Maridaje: {maridaje_recomendado}")
+        # Imprimir recomendaciones de ingredientes y extras si se implementa
+
+    # Llamar a la función de recomendaciones
+    recomendar_basado_en_historial('nombre_del_usuario', obtener_preferencias_usuario)
 
 Menu.Menu()
 
