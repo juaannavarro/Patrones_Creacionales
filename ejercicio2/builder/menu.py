@@ -12,7 +12,19 @@ class Menu(Pizzeria):
     def Menu():
         
         print("Bienvenido a la pizzeria")
-
+        #crear usuario
+        usuario_builder = UsuarioBuilder()
+        usuario_director = UsuarioDirector(usuario_builder)
+        usuario_director.crear_usuario("","","","")
+        usuario = usuario_director.get_usuario()
+        print("Por favor, ingrese sus datos")
+        nombre = input("Nombre: ")
+        apellido = input("Apellido: ")
+        email = input("Email: ")
+        telefono = input("Telefono: ")
+        usuario_director.crear_usuario(nombre, apellido, email, telefono)
+        usuario = usuario_director.get_usuario()
+        print(usuario)
         print("Elija el tipo de pizza:")
         print("1. Jamón y queso")
         print("2. Cuatro quesos")
@@ -268,15 +280,18 @@ class Menu(Pizzeria):
                 builder.product.list_parts()
                 print("\n")
 
-                archivo_pedidos = 'pedidos.csv'
-                archivo_existe = os.path.isfile(archivo_pedidos) and os.path.getsize(archivo_pedidos) > 0
 
-                with open(archivo_pedidos, 'a', newline="") as file:
+
+        else:
+            print("Opción no válida")
+        archivo_pedidos = 'pedidos.csv'
+        archivo_existe = os.path.isfile(archivo_pedidos) and os.path.getsize(archivo_pedidos) > 0
+
+        with open(archivo_pedidos, 'a', newline="") as file:
                             writer = csv.writer(file, delimiter=';')
-                    
                             if not archivo_existe:
-                                writer.writerow(['Tipo de Pizza', 'Masa', 'Cocción', 'Presentación', 'Maridaje', 'Extras', 'Ingredientes', 'Salsa'])
-                            detalles = [pizza_seleccionada[0], masa_seleccionada, coccion_seleccionada, presentacion_seleccionada, maridaje_seleccionado]
+                                writer.writerow(['Usuario','Tipo de Pizza', 'Masa', 'Cocción', 'Presentación', 'Maridaje', 'Extras', 'Ingredientes', 'Salsa'])
+                            detalles = [usuario, pizza_seleccionada[0], masa_seleccionada, coccion_seleccionada, presentacion_seleccionada, maridaje_seleccionado]
                             detalles.extend([', '.join(extras_seleccionados)])
                             if pizza_seleccionada == ["Personalizada"]:
                                 detalles.append(', '.join(ingredientes_seleccionados))
@@ -290,11 +305,7 @@ class Menu(Pizzeria):
                             else:
                                 print("Opción no válida")
                             writer.writerow(detalles)
-
-        else:
-            print("Opción no válida")
-                
         print('Has elegido', pizza_seleccionada)
-      
+
 Menu.Menu()
 

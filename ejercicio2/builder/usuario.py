@@ -59,18 +59,7 @@ class UsuarioDirector:
     
 
         #meter un input para cada uno de los datos
-        print("Introduce el nombre del usuario: ")
-        nombre = input()
-        print("Introduce el apellido del usuario: ")
-        apellido = input()
-        print("Introduce el email del usuario: ")
-        email = input()
-        print("Introduce el telefono del usuario: ")
-        telefono = input()
-        director.crear_usuario(nombre, apellido, email, telefono)
-        
-        usuario = director.get_usuario()
-        print(usuario)
+
 
 
 
