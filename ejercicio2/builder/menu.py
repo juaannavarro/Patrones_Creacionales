@@ -12,19 +12,7 @@ class Menu(Pizzeria):
     def Menu():
         
         print("Bienvenido a la pizzeria")
-        builder = UsuarioBuilder()
-        director = UsuarioDirector(builder)
-        print("Introduce el nombre del usuario: ")
-        nombre = input()
-        print("Introduce el apellido del usuario: ")
-        apellido = input()
-        print("Introduce el email del usuario: ")
-        email = input()
-        print("Introduce el telefono del usuario: ")
-        telefono = input()
-        director.crear_usuario(nombre, apellido, email, telefono)
-        usuario = director.get_usuario()
-        print(usuario)
+
         print("Elija el tipo de pizza:")
         print("1. Jamón y queso")
         print("2. Cuatro quesos")
@@ -287,8 +275,8 @@ class Menu(Pizzeria):
                             writer = csv.writer(file, delimiter=';')
                     
                             if not archivo_existe:
-                                writer.writerow(['Usuario','Tipo de Pizza', 'Masa', 'Cocción', 'Presentación', 'Maridaje', 'Extras', 'Ingredientes', 'Salsa'])
-                            detalles = [usuario, pizza_seleccionada[0], masa_seleccionada, coccion_seleccionada, presentacion_seleccionada, maridaje_seleccionado]
+                                writer.writerow(['Tipo de Pizza', 'Masa', 'Cocción', 'Presentación', 'Maridaje', 'Extras', 'Ingredientes', 'Salsa'])
+                            detalles = [pizza_seleccionada[0], masa_seleccionada, coccion_seleccionada, presentacion_seleccionada, maridaje_seleccionado]
                             detalles.extend([', '.join(extras_seleccionados)])
                             if pizza_seleccionada == ["Personalizada"]:
                                 detalles.append(', '.join(ingredientes_seleccionados))
