@@ -1,28 +1,24 @@
-                archivo_pedidos = 'pedidos.csv'
-                archivo_existe = os.path.isfile(archivo_pedidos) and os.path.getsize(archivo_pedidos) > 0
+# Patrones Creacionales
 
-                with open(archivo_pedidos, 'a', newline="") as file:
-                    writer = csv.writer(file, delimiter=';')
-                    
-                    if not archivo_existe:
-                        writer.writerow(['nombre','apellido','email','telefono','Tipo de Pizza', 'Masa', 'Cocción', 'Presentación', 'Maridaje', 'Extras', 'Ingredientes', 'Salsa'])
-                        
-                    detalles = [nombre, pizza_seleccionada[0], masa_seleccionada, coccion_seleccionada, presentacion_seleccionada, maridaje_seleccionado]
-                    detalles.extend([', '.join(extras_seleccionados)])
-                    
-                    if pizza_seleccionada == ["Personalizada"]:
-                        detalles.append(', '.join(ingredientes_seleccionados))
-                        detalles.append(salsa_seleccionada)
-                        
-                    elif pizza_seleccionada == ["Barbacoa"]:
-                        detalles.extend(['Ingredientes: carne, queso, bacon, cebolla, salsa barbacoa ', 'Salsa de barbacoa'])
-                        
-                    elif pizza_seleccionada == ["Cuatro quesos"]:
-                        detalles.extend(['Ingredientes: Mozzarella, Cheddar, Parmesano, Gorgonzola', 'Salsa de tomate'])
-                            
-                    elif pizza_seleccionada == ["Jamón y Queso"]:
-                        detalles.extend(['Ingredientes: Jamón, queso', 'Salsa de tomate'])
-                    else:
-                        print("Opción no válida")
-                            
-                    writer.writerow(detalles)# Patrones_Creacionales
+## Introducción
+
+Los patrones de diseño son soluciones a problemas comunes en el desarrollo de software. Estos patrones son utilizados por los desarrolladores para resolver problemas que ya han sido resueltos anteriormente por otros desarrolladores. Los patrones de diseño pueden ser vistos como un catálogo de soluciones probadas y comprobadas a problemas comunes en el desarrollo de software. Estos patrones de diseño se pueden clasificar en tres categorías: patrones de creación, patrones de estructura y patrones de comportamiento.
+
+
+## Patrones de creación
+
+Los patrones de creación se utilizan para crear objetos de diversas formas, lo que puede ayudar a resolver problemas de diseño o problemas de flexibilidad en el diseño de una aplicación. Los patrones de creación se pueden clasificar en cinco categorías: patrones de factoría, patrones abstractos, patrones de constructor, patrones de prototipo y patrones de un solo tono.
+
+
+### Ejercicio 1 - Patrón de factoría
+
+El patrón de factoría se utiliza para crear objetos de diferentes tipos. El patrón de factoría se utiliza cuando se necesita crear un objeto de un subtipo determinado, pero no se conoce el tipo exacto del objeto que se va a crear. El patrón de factoría se utiliza para crear objetos de diferentes tipos. El patrón de factoría se utiliza cuando se necesita crear un objeto de un subtipo determinado, pero no se conoce el tipo exacto del objeto que se va a crear. El patrón de factoría se utiliza para crear objetos de diferentes tipos. El patrón de factoría se utiliza cuando se necesita crear un objeto de un subtipo determinado, pero no se conoce el tipo exacto del objeto que se va a crear. El patrón de factoría se utiliza para crear objetos de diferentes tipos. El patrón de factoría se utiliza cuando se necesita crear un objeto de un subtipo determinado, pero no se conoce el tipo exacto del objeto que se va a crear. El patrón de factoría se utiliza para crear objetos de diferentes tipos. El patrón de factoría se utiliza cuando se necesita crear un objeto de un subtipo determinado, pero no se conoce el tipo exacto del objeto que se va a crear. El patrón de factoría se utiliza para crear objetos de diferentes tipos. El patrón de factoría se utiliza cuando se necesita crear un objeto de un subtipo determinado, pero no se conoce el tipo exacto del objeto que se va a crear.
+
+
+### Ejercicio 2 - Patrón abstracto
+
+El patrón abstracto se utiliza para crear objetos de diferentes tipos. El patrón abstracto se utiliza cuando se necesita crear un objeto de un subtipo determinado, pero no se conoce el tipo exacto del objeto que se va a crear. El patrón abstracto se utiliza para crear objetos de diferentes tipos. El patrón abstracto se utiliza cuando se necesita crear un objeto de un subtipo determinado, pero no se conoce el tipo exacto del objeto que se va a crear. El patrón abstracto se utiliza para crear objetos de diferentes tipos. El patrón abstracto se utiliza cuando se necesita crear un objeto de un subtipo determinado, pero no se conoce el tipo exacto del objeto que se va a crear.
+
+
+
+
