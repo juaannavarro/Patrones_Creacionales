@@ -7,17 +7,7 @@ from personalizada import Personalizada, ConstructorPersonalizada
 from pizzeria import Pizzeria
 from barbacoa import Barbacoa, ConstructorBarbacoa
 
-def guardar_pizza_en_csv(pizza_detalle, archivo='pizzas_guardadas.csv'):
-        nombres_de_campos = ['Tipo de Pizza', 'Masa', 'Cocción', 'Presentación', 'Maridaje', 'Extras', 'Ingredientes', 'Salsa']
 
-        with open(archivo, mode='a', newline='', encoding='utf-8') as f:
-                        escritor_csv = csv.DictWriter(f, fieldnames=nombres_de_campos)
-                        
-                        # Si el archivo está vacío, escribe los nombres de los campos como cabecera.
-                        if f.tell() == 0:
-                            escritor_csv.writeheader()
-
-        escritor_csv.writerow(pizza_detalle)
 class Menu(Pizzeria):
 
     def Menu():
@@ -279,21 +269,23 @@ class Menu(Pizzeria):
                 print("\n")
 
 
-                pizza_detalle = {
-                            'Tipo de Pizza': pizza_seleccionada[0],
-                            'Masa': masa_seleccionada,
-                            'Cocción': coccion_seleccionada,
-                            'Presentación': presentacion_seleccionada,
-                            'Maridaje': maridaje_seleccionado,
-                            'Extras': ', '.join(extras_seleccionados),
-                            'Ingredientes': ', '.join(ingredientes_seleccionados),
-                            'Salsa': salsa_seleccionada
-                        }
 
-                guardar_pizza_en_csv(pizza_detalle)
         else:
             print("Opción no válida")
             
+        with open ('pedidos.csv', 'a', newline ="") as file:
+            writer = csv.writer(file, delimiter = ';')
+            if pizza_seleccionada == ["Jamón y Queso"]:
+                writer.writerow([pizza_seleccionada, masa_seleccionada, salsa_seleccionada, ingredientes_seleccionados, coccion_seleccionada, presentacion_seleccionada, maridaje_seleccionado, extras_seleccionados])
+            elif pizza_seleccionada == ["Cuatro quesos"]:
+                writer.writerow([pizza_seleccionada, masa_seleccionada, coccion_seleccionada, presentacion_seleccionada, maridaje_seleccionado, extras_seleccionados])
+            elif pizza_seleccionada == ["Barbacoa"]:
+                writer.writerow([pizza_seleccionada, masa_seleccionada, coccion_seleccionada, presentacion_seleccionada, maridaje_seleccionado, extras_seleccionados])
+            elif pizza_seleccionada == ["Personalizada"]:  
+                writer.writerow([pizza_seleccionada, masa_seleccionada, coccion_seleccionada, presentacion_seleccionada, maridaje_seleccionado, extras_seleccionados])
+            else:
+                print("Opción no válida")
+                
         print('Has elegido', pizza_seleccionada)
         
 Menu.Menu()
