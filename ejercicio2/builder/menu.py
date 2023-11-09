@@ -7,10 +7,7 @@ from personalizada import Personalizada, ConstructorPersonalizada
 from pizzeria import Pizzeria
 from barbacoa import Barbacoa, ConstructorBarbacoa
 from usuario import UsuarioBuilder, UsuarioDirector
-from cambiar import buscar_pedidos_usuario, reconstruir_pizza, visualizar_pizza, editar_pizza, guardar_pizza
-
 class Menu(Pizzeria):
-
 
     def Menu():
         
@@ -287,27 +284,29 @@ class Menu(Pizzeria):
                 archivo_existe = os.path.isfile(archivo_pedidos) and os.path.getsize(archivo_pedidos) > 0
 
                 with open(archivo_pedidos, 'a', newline="") as file:
-                    writer = csv.writer(file, delimiter=';')
-                if not archivo_existe:
-                    writer.writerow(['nombre','apellido','email','telefono','Tipo de Pizza', 'Masa', 'Cocción', 'Presentación', 'Maridaje', 'Extras', 'Ingredientes', 'Salsa'])
-                    detalles = [nombre, pizza_seleccionada[0], masa_seleccionada, coccion_seleccionada, presentacion_seleccionada, maridaje_seleccionado]
-                    detalles.extend([', '.join(extras_seleccionados)])
-                    if pizza_seleccionada == ["Personalizada"]:
-                        detalles.append(', '.join(ingredientes_seleccionados))
-                        detalles.append(salsa_seleccionada)
-                    elif pizza_seleccionada == ["Barbacoa"]:
-                        detalles.extend(['Ingredientes: carne, queso, bacon, cebolla, salsa barbacoa ', 'Salsa de barbacoa'])
-                    elif pizza_seleccionada == ["Cuatro quesos"]:
-                        detalles.extend(['Ingredientes: Mozzarella, Cheddar, Parmesano, Gorgonzola', 'Salsa de tomate'])
-                    elif pizza_seleccionada == ["Jamón y Queso"]:
-                        detalles.extend(['Ingredientes: Jamón, queso', 'Salsa de tomate'])
-                    else:
-                        print("Opción no válida")
-                        writer.writerow(detalles)
+                            writer = csv.writer(file, delimiter=';')
+                    
+                            if not archivo_existe:
+                                writer.writerow(['Usuario','Tipo de Pizza', 'Masa', 'Cocción', 'Presentación', 'Maridaje', 'Extras', 'Ingredientes', 'Salsa'])
+                            detalles = [usuario, pizza_seleccionada[0], masa_seleccionada, coccion_seleccionada, presentacion_seleccionada, maridaje_seleccionado]
+                            detalles.extend([', '.join(extras_seleccionados)])
+                            if pizza_seleccionada == ["Personalizada"]:
+                                detalles.append(', '.join(ingredientes_seleccionados))
+                                detalles.append(salsa_seleccionada)
+                            elif pizza_seleccionada == ["Barbacoa"]:
+                                detalles.extend(['Ingredientes: carne, queso, bacon, cebolla, salsa barbacoa ', 'Salsa de barbacoa'])
+                            elif pizza_seleccionada == ["Cuatro quesos"]:
+                                detalles.extend(['Ingredientes: Mozzarella, Cheddar, Parmesano, Gorgonzola', 'Salsa de tomate'])
+                            elif pizza_seleccionada == ["Jamón y Queso"]:
+                                detalles.extend(['Ingredientes: Jamón, queso', 'Salsa de tomate'])
+                            else:
+                                print("Opción no válida")
+                            writer.writerow(detalles)
 
         else:
             print("Opción no válida")
                 
-
+        print('Has elegido', pizza_seleccionada)
+      
 Menu.Menu()
 
