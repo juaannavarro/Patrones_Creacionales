@@ -276,7 +276,7 @@ class Menu(Pizzeria):
         with open ('pedidos.csv', 'a', newline ="") as file:
             writer = csv.writer(file, delimiter = ';')
             if pizza_seleccionada == ["Jamón y Queso"]:
-                writer.writerow([pizza_seleccionada, masa_seleccionada, salsa_seleccionada, ingredientes_seleccionados, coccion_seleccionada, presentacion_seleccionada, maridaje_seleccionado, extras_seleccionados])
+                writer.writerow([pizza_seleccionada, masa_seleccionada, ', '.join(Pizzeria.salsa_base), ', '.join(Pizzeria.ingredientes), coccion_seleccionada, presentacion_seleccionada, maridaje_seleccionado, extras_seleccionados])
             elif pizza_seleccionada == ["Cuatro quesos"]:
                 writer.writerow([pizza_seleccionada, masa_seleccionada, coccion_seleccionada, presentacion_seleccionada, maridaje_seleccionado, extras_seleccionados])
             elif pizza_seleccionada == ["Barbacoa"]:
