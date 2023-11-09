@@ -26,9 +26,12 @@ class ConstructorBarbacoa(Pizzeria):
         self._product.add("Salsa: Barbacoa")
 
 
-    def ingredientes(self, ingredientes: List[str]) -> None:
-        for ingrediente in ingredientes:
-            self._product.add(f"Ingrediente: {ingrediente}")
+    def ingredientes(self) -> None:
+        self._product.add("Ingrediente: Carne")
+        self._product.add("Ingrediente: Queso")
+        self._product.add("Ingrediente: Cebolla")
+        self._product.add("Ingrediente: Bacon")
+        self._product.add("Ingrediente: Salsa barbacoa")
 
     def coccion(self, tipo: str) -> None:
         self._product.add(f"Cocción: {tipo}")
