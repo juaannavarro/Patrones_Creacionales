@@ -1,5 +1,5 @@
 
-
+import csv
 from jamonyqueso import jamonyqueso, Constructorjamonyqueso
 from cuatroquesos import cuatroQuesos, ConstructorcuatroQuesos
 from director import Director
@@ -7,8 +7,19 @@ from personalizada import Personalizada, ConstructorPersonalizada
 from pizzeria import Pizzeria
 from barbacoa import Barbacoa, ConstructorBarbacoa
 
-#creame una funcion que ejecute el menu y haga elegir entre las pizzas
+def guardar_pizza_en_csv(pizza_detalle, archivo='pizzas_guardadas.csv'):
+        nombres_de_campos = ['Tipo de Pizza', 'Masa', 'Cocción', 'Presentación', 'Maridaje', 'Extras', 'Ingredientes', 'Salsa']
+
+        with open(archivo, mode='a', newline='', encoding='utf-8') as f:
+                        escritor_csv = csv.DictWriter(f, fieldnames=nombres_de_campos)
+                        
+                        # Si el archivo está vacío, escribe los nombres de los campos como cabecera.
+                        if f.tell() == 0:
+                            escritor_csv.writeheader()
+
+        escritor_csv.writerow(pizza_detalle)
 class Menu(Pizzeria):
+
     def Menu():
         
         print("Bienvenido a la pizzeria")
@@ -267,10 +278,22 @@ class Menu(Pizzeria):
                 builder.product.list_parts()
                 print("\n")
 
+
+                pizza_detalle = {
+                            'Tipo de Pizza': pizza_seleccionada[0],
+                            'Masa': masa_seleccionada,
+                            'Cocción': coccion_seleccionada,
+                            'Presentación': presentacion_seleccionada,
+                            'Maridaje': maridaje_seleccionado,
+                            'Extras': ', '.join(extras_seleccionados),
+                            'Ingredientes': ', '.join(ingredientes_seleccionados),
+                            'Salsa': salsa_seleccionada
+                        }
+
+                guardar_pizza_en_csv(pizza_detalle)
         else:
             print("Opción no válida")
             
         print('Has elegido', pizza_seleccionada)
-
-
+        
 Menu.Menu()
